@@ -1,18 +1,18 @@
 #include<stdio.h>
-int search(int a[],int key,int l,int h)
+int nonrecsearch(int a[],int key,int n)
 {
-	int mid=(l+h)/2;
-	if(l<=h)
-	{
-	if(a[mid]==key)
-	 return mid;
-	else if(key<a[mid])
-	 return search(a,key,l,mid-1);
-	else
-	 return search(a,key,mid+1,h);
-}
-else
-return -1;
+	int mid,l=0,h=n-1;;
+  while(l<=h)
+  {
+  	mid=(l+h)/2;
+  	if(a[mid]==key)
+  	 return mid;
+  	else if(a[mid]<key)
+  	 l=mid+1;
+  	else
+  	 h=mid-1;
+  }
+  return -1;
 }
 void sort(int *a,int n)
 {
@@ -40,8 +40,9 @@ void main()
 	scanf("%d",&key);
 	int index;
 	sort(a,n);
-	if((index=search(a,key,0,n))==-1)
+	if((index=nonrecsearch(a,key,n))==-1)
 	 printf("not found");
 	else
 	 printf("found at index %d",index);
 }
+
